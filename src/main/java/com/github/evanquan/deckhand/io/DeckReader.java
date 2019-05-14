@@ -121,8 +121,10 @@ public class DeckReader {
         Deck deck = new Deck();
 
         for (CardInfo info : cardInfo) {
-            deck.add(new Card(info.getCardName(), info.getCardDescription(),
-                    images.get(info.getCardName())));
+            for (int i = 0; i < info.getQuantity(); i++) {
+                deck.add(new Card(info.getCardName(), info.getCardDescription(),
+                        images.get(info.getCardName())));
+            }
         }
 
         return deck;
