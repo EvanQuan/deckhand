@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="20.0"
+          prefHeight="300.0" prefWidth="300.0" vgap="20.0"
+          xmlns="http://javafx.com/javafx/8.0.172-ea"
+          fx:controller="com.github.evanquan.deckhand.gui.Controller">
+    <columnConstraints>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+    </rowConstraints>
+    <children>
+        <Button fx:id="btn_msg" mnemonicParsing="false" onAction="#pressButton"
+                text="Button"/>
+    </children>
+</GridPane>
