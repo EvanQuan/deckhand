@@ -3,7 +3,9 @@ package com.github.evanquan.deckhand.io;
 import com.github.evanquan.deckhand.cards.Card;
 import com.github.evanquan.deckhand.cards.Deck;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -41,6 +43,9 @@ public class DeckReader {
 
     private static final ArrayList<String> VALID_IMAGE_EXTENSIONS =
             new ArrayList<>(Arrays.asList("png", "jpg"));
+    private static final String COMMA_DELIMITER = ",";
+    private static final String DEFAULT_CARD_DESCRIPTION = "";
+    private static final int DEFAULT_CARD_QUANTITY = 1;
 
     private static DeckReader instance = new DeckReader();
 
@@ -60,6 +65,32 @@ public class DeckReader {
 
         ArrayList<CardInfo> cardInfo = new ArrayList<>();
 
+        try (BufferedReader reader =
+                     new BufferedReader(new FileReader(csvPath))) {
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] values = line.split(COMMA_DELIMITER);
+                String cardImageName =
+                        values[CardInfoIndex.CARD_IMAGE_NAME.getValue()];
+                String cardName =
+                        values[CardInfoIndex.CARD_NAME.getValue()];
+                String cardDescription =
+                        values.length > CardInfoIndex.CARD_DESCRIPTION.getValue() ?
+                                values[CardInfoIndex.CARD_DESCRIPTION.getValue()] :
+                                DEFAULT_CARD_DESCRIPTION;
+                int cardQuantity =
+                        values.length > CardInfoIndex.CARD_QUANTITY.getValue() ?
+                                Integer.parseInt(values[CardInfoIndex.CARD_QUANTITY.getValue()]) :
+                                DEFAULT_CARD_QUANTITY;
+                cardInfo.add(new CardInfo(cardImageName, cardName,
+                        cardDescription, cardQuantity));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return cardInfo;
     }
 
@@ -77,7 +108,7 @@ public class DeckReader {
         ArrayList<CardInfo> cardInfo =
                 getCardInfo(getCSVPath(directoryToSearch, csvName));
 
-        if (cardInfoIsValid(images, cardInfo)) {
+        if (allInfoHasValidImage(images, cardInfo)) {
             return buildDeck(images, cardInfo);
         }
 
@@ -105,8 +136,8 @@ public class DeckReader {
      * @return true if the images, names, and descriptions have the correct
      * counts in order to create a {@link Deck} of {@link Card}s.
      */
-    private boolean cardInfoIsValid(HashMap<String, File> images,
-                                    ArrayList<CardInfo> cardInfo) {
+    private boolean allInfoHasValidImage(HashMap<String, File> images,
+                                         ArrayList<CardInfo> cardInfo) {
         for (CardInfo info : cardInfo) {
             if (!images.containsKey(info.getCardName())) {
                 return false;
@@ -162,12 +193,11 @@ public class DeckReader {
                 + (directoryToSearch.endsWith("/") ? "" : "/")
                 + csvName;
     }
-
     /**
      * Index values from CSV
      */
     private enum CardInfoIndex {
-        CARD_FILE_NAME(0),
+        CARD_IMAGE_NAME(0),
         CARD_NAME(1),
         CARD_DESCRIPTION(2),
         CARD_QUANTITY(3),
@@ -183,6 +213,5 @@ public class DeckReader {
             return value;
         }
     }
-
 
 }

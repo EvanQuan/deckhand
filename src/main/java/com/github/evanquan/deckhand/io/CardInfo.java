@@ -13,9 +13,9 @@ import java.io.File;
 class CardInfo {
 
     /**
-     * {@link File} name without extension.
+     * Image {@link File} name without extension.
      */
-    private String fileName;
+    private String imageName;
     /**
      * In-game {@link Card} name.
      */
@@ -27,10 +27,11 @@ class CardInfo {
     /**
      * Quantity of {@link Card} to include in the {@link Deck}.
      */
-    private String quantity;
+    private int quantity;
 
-    CardInfo(String fileName, String cardName, String cardDescription, String quantity) {
-        this.fileName = fileName;
+    CardInfo(String imageName, String cardName, String cardDescription,
+             int quantity) {
+        this.imageName = imageName;
         this.cardName = cardName;
         this.cardDescription = cardDescription;
         this.quantity = quantity;
@@ -39,28 +40,28 @@ class CardInfo {
     /**
      * @return filename without extension
      */
-    public String getFileName() {
-        return fileName;
+    String getImageName() {
+        return imageName;
     }
 
     /**
      * @return card name
      */
-    public String getCardName() {
+    String getCardName() {
         return cardName;
     }
 
     /**
      * @return card description
      */
-    public String getCardDescription() {
+    String getCardDescription() {
         return cardDescription;
     }
 
     /**
      * @return quantity of card to put in deck
      */
-    public String getQuantity() {
+    int getQuantity() {
         return quantity;
     }
 }
