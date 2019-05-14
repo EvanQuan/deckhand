@@ -6,6 +6,7 @@ import com.github.evanquan.deckhand.cards.Deck;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Reads card information from a CSV and image files to generate a {@link Deck}
@@ -15,7 +16,28 @@ import java.util.Arrays;
  */
 public class DeckReader {
 
-    private static final String DIRECTORY_TO_SEARCH = ".";
+    /**
+     * Get images from image files
+     *
+     * @param directoryToSearch for images
+     * @return map of all image names with their corresponding image in the
+     * specified directory
+     */
+    private HashMap<String, File> getImages(String directoryToSearch) {
+        HashMap<String, File> images = new HashMap<>();
+        File imageDirectory = new File(directoryToSearch);
+
+        File[] files = imageDirectory.listFiles();
+
+        assert files != null;
+
+        for (File file : files) {
+            if (isImage(file)) {
+                images.put(stripExtension(file.getName()), file);
+            }
+        }
+        return images;
+    }
 
     private static final ArrayList<String> VALID_IMAGE_EXTENSIONS =
             new ArrayList<>(Arrays.asList("png", "jpg"));
@@ -29,53 +51,50 @@ public class DeckReader {
         return instance;
     }
 
-    private ArrayList<File> getImages() {
-        ArrayList<File> images = new ArrayList<>();
-        File imageDirectory = new File(DeckReader.DIRECTORY_TO_SEARCH);
-
-        File[] files = imageDirectory.listFiles();
-
-        assert files != null;
-
-        for (File file : files) {
-            if (isImage(file)) {
-                images.add(file);
-            }
-        }
-        return images;
-    }
-
     /**
-     * @param names        of cards
-     * @param descriptions of cards
+     * Get card info from CSV.
+     * @param csvPath      for card info
+     * @return csv info
      */
-    private void getCardInfo(ArrayList<String> names,
-                             ArrayList<String> descriptions) {
+    private ArrayList<CardInfo> getCardInfo(String csvPath) {
 
+        ArrayList<CardInfo> cardInfo = new ArrayList<>();
+
+        return cardInfo;
     }
 
     /**
+     * @param directoryToSearch for images and csv
+     * @param csvName containing card info
      * @return a {@link Deck} of {@link Card}s gathered from the image files and
      * CSV values.
      * @throws Exception if the information from the files is not configured
      *                   correctly.
      */
-    private Deck getDeck() throws Exception {
-        ArrayList<File> images = getImages();
-        ArrayList<String> names = new ArrayList<>();
-        ArrayList<String> descriptions = new ArrayList<>();
-        getCardInfo(names, descriptions);
+    public Deck getDeck(String directoryToSearch,
+                        String csvName) throws Exception {
+        HashMap<String, File> images = getImages(directoryToSearch);
+        ArrayList<CardInfo> cardInfo =
+                getCardInfo(getCSVPath(directoryToSearch, csvName));
 
-        if (hasCorrectCount(images, names, descriptions)) {
-            Deck deck = new Deck();
-            for (int i = 0; i < names.size(); i++) {
-                deck.add(new Card(names.get(i), descriptions.get(i), images.get(i)));
-            }
-            return deck;
+        if (cardInfoIsValid(images, cardInfo)) {
+            return buildDeck(images, cardInfo);
         }
 
         throw new Exception("Incorrect image configuration.");
 
+    }
+
+    private Deck buildDeck(HashMap<String, File> images,
+                           ArrayList<CardInfo> cardInfo) {
+        Deck deck = new Deck();
+
+        for (CardInfo info : cardInfo) {
+            deck.add(new Card(info.getCardName(), info.getCardDescription(),
+                    images.get(info.getCardName())));
+        }
+
+        return deck;
     }
 
     /**
@@ -83,16 +102,32 @@ public class DeckReader {
      * order to generate card info.
      *
      * @param images       gathered from image files
-     * @param names        gathered from the CSV
-     * @param descriptions gathered from the CSV
      * @return true if the images, names, and descriptions have the correct
      * counts in order to create a {@link Deck} of {@link Card}s.
      */
-    private boolean hasCorrectCount(ArrayList<File> images,
-                                    ArrayList<String> names,
-                                    ArrayList<String> descriptions) {
-        return (images.size() >= names.size())
-                && (names.size() == descriptions.size());
+    private boolean cardInfoIsValid(HashMap<String, File> images,
+                                    ArrayList<CardInfo> cardInfo) {
+        for (CardInfo info : cardInfo) {
+            if (!images.containsKey(info.getCardName())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     *
+     * @param file to get the extension from
+     * @return the file extension of the file, or empty string if there is no
+     * file extension.
+     */
+    private String getExtension(File file) {
+        try {
+            String name = file.getName();
+            return name.substring(name.lastIndexOf("."));
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     /**
@@ -105,15 +140,48 @@ public class DeckReader {
                 && VALID_IMAGE_EXTENSIONS.contains(getExtension(file).toLowerCase());
     }
 
-    private String getExtension(File file) {
-        String extension = "";
+    /**
+     * @param name of file
+     * @return the name without the file extension
+     */
+    private String stripExtension(String name) {
         try {
-            String name = file.getName();
-            return name.substring(name.lastIndexOf("."));
+            return name.substring(0, name.lastIndexOf("."));
         } catch (Exception e) {
-            extension = "";
+            return name;
         }
-        return extension;
+    }
+
+    /**
+     * @param directoryToSearch of CSV
+     * @param csvName           of the CSV to read
+     * @return the path of the csvFile
+     */
+    private String getCSVPath(String directoryToSearch, String csvName) {
+        return directoryToSearch
+                + (directoryToSearch.endsWith("/") ? "" : "/")
+                + csvName;
+    }
+
+    /**
+     * Index values from CSV
+     */
+    private enum CardInfoIndex {
+        CARD_FILE_NAME(0),
+        CARD_NAME(1),
+        CARD_DESCRIPTION(2),
+        CARD_QUANTITY(3),
+        ;
+
+        private final int value;
+
+        CardInfoIndex(int i) {
+            this.value = i;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 
 
