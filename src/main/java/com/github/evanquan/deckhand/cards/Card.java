@@ -22,6 +22,15 @@ public class Card {
         return description;
     }
 
+    @Override
+    public String toString() {
+        return "Card{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", image=" + image +
+                '}';
+    }
+
     public File getImage() {
         return image;
     }
