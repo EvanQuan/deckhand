@@ -8,7 +8,7 @@ public class Card {
     private String description;
     private File image;
 
-    Card(String name, String description, File image) {
+    public Card(String name, String description, File image) {
         this.name = name;
         this.description = description;
         this.image = image;
