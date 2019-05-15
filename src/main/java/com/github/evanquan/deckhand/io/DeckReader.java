@@ -2,6 +2,7 @@ package com.github.evanquan.deckhand.io;
 
 import com.github.evanquan.deckhand.cards.Card;
 import com.github.evanquan.deckhand.cards.Deck;
+import com.opencsv.CSVReader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -108,6 +109,14 @@ public class DeckReader {
         return line.replace(ZERO_WIDTH_NO_BREAK_SPACE, "");
     }
 
+    private String[] sanitize(String[] values) {
+        ArrayList<String> list = new ArrayList<>();
+        for (String value : values) {
+            list.add(sanitize(value));
+        }
+        return list.toArray(new String[0]);
+    }
+
     /**
      * @param directoryToSearch for images and csv
      * @param csvName containing card info
@@ -120,11 +129,39 @@ public class DeckReader {
                         String csvName) throws Exception {
         HashMap<String, File> images = getImages(directoryToSearch);
         ArrayList<CardInfo> cardInfo =
-                getCardInfo(getCSVPath(directoryToSearch, csvName));
+                getCardInfo2(getCSVPath(directoryToSearch, csvName));
 
         checkAllCardsHaveExistingImage(images, cardInfo);
 
         return buildDeck(images, cardInfo);
+    }
+
+    private ArrayList<CardInfo> getCardInfo2(String csvPath) throws IOException {
+
+        ArrayList<CardInfo> cardInfo = new ArrayList<>();
+
+        try (CSVReader csvReader = new CSVReader(new FileReader(csvPath))) {
+            String[] values;
+            while ((values = csvReader.readNext()) != null) {
+                values = sanitize(values);
+                String cardImageName =
+                        values[CardInfoIndex.CARD_IMAGE_NAME.getValue()];
+                String cardName =
+                        values[CardInfoIndex.CARD_NAME.getValue()];
+                String cardDescription =
+                        values.length > CardInfoIndex.CARD_DESCRIPTION.getValue() ?
+                                values[CardInfoIndex.CARD_DESCRIPTION.getValue()] :
+                                DEFAULT_CARD_DESCRIPTION;
+                int cardQuantity =
+                        values.length > CardInfoIndex.CARD_QUANTITY.getValue() ?
+                                Integer.parseInt(values[CardInfoIndex.CARD_QUANTITY.getValue()]) :
+                                DEFAULT_CARD_QUANTITY;
+                cardInfo.add(new CardInfo(cardImageName, cardName,
+                        cardDescription, cardQuantity));
+            }
+        }
+
+        return cardInfo;
     }
 
     private Deck buildDeck(HashMap<String, File> images,
