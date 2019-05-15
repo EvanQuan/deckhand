@@ -3,8 +3,8 @@ package com.github.evanquan.deckhand.io;
 import com.github.evanquan.deckhand.cards.Card;
 import com.github.evanquan.deckhand.cards.Deck;
 import com.opencsv.CSVReader;
+import org.apache.commons.lang3.StringUtils;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -61,44 +61,6 @@ public class DeckReader {
     }
 
     /**
-     * Get card info from CSV.
-     * @param csvPath      for card info
-     * @return csv info
-     * @throws IOException if the CSV cannot be found.
-     */
-    private ArrayList<CardInfo> getCardInfo(String csvPath) throws IOException {
-
-        ArrayList<CardInfo> cardInfo = new ArrayList<>();
-
-        try (BufferedReader reader =
-                     new BufferedReader(new FileReader(csvPath))) {
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                line = sanitize(line);
-                String[] values = line.split(COMMA_DELIMITER);
-                String cardImageName =
-                        values[CardInfoIndex.CARD_IMAGE_NAME.getValue()];
-                String cardName =
-                        values[CardInfoIndex.CARD_NAME.getValue()];
-                String cardDescription =
-                        values.length > CardInfoIndex.CARD_DESCRIPTION.getValue() ?
-                                values[CardInfoIndex.CARD_DESCRIPTION.getValue()] :
-                                DEFAULT_CARD_DESCRIPTION;
-                int cardQuantity =
-                        values.length > CardInfoIndex.CARD_QUANTITY.getValue() ?
-                                Integer.parseInt(values[CardInfoIndex.CARD_QUANTITY.getValue()]) :
-                                DEFAULT_CARD_QUANTITY;
-                cardInfo.add(new CardInfo(cardImageName, cardName,
-                        cardDescription, cardQuantity));
-            }
-
-        }
-
-        return cardInfo;
-    }
-
-    /**
      * Sometimes CSVs contain zero width no-break spaces in them.
      * https://stackoverflow.com/questions/9691771/why-is-65279-appearing-in-my-html
      *
@@ -129,14 +91,21 @@ public class DeckReader {
                         String csvName) throws Exception {
         HashMap<String, File> images = getImages(directoryToSearch);
         ArrayList<CardInfo> cardInfo =
-                getCardInfo2(getCSVPath(directoryToSearch, csvName));
+                getCardInfo(getCSVPath(directoryToSearch, csvName));
 
         checkAllCardsHaveExistingImage(images, cardInfo);
 
         return buildDeck(images, cardInfo);
     }
 
-    private ArrayList<CardInfo> getCardInfo2(String csvPath) throws IOException {
+    /**
+     * Get card info from CSV.
+     *
+     * @param csvPath for card info
+     * @return csv info
+     * @throws IOException if the CSV cannot be found.
+     */
+    private ArrayList<CardInfo> getCardInfo(String csvPath) throws IOException {
 
         ArrayList<CardInfo> cardInfo = new ArrayList<>();
 
@@ -152,10 +121,14 @@ public class DeckReader {
                         values.length > CardInfoIndex.CARD_DESCRIPTION.getValue() ?
                                 values[CardInfoIndex.CARD_DESCRIPTION.getValue()] :
                                 DEFAULT_CARD_DESCRIPTION;
-                int cardQuantity =
-                        values.length > CardInfoIndex.CARD_QUANTITY.getValue() ?
-                                Integer.parseInt(values[CardInfoIndex.CARD_QUANTITY.getValue()]) :
-                                DEFAULT_CARD_QUANTITY;
+                String quantityString =
+                        values.length > CardInfoIndex.CARD_QUANTITY.getValue()
+                                && !values[CardInfoIndex.CARD_QUANTITY.getValue()].isEmpty()
+                                && StringUtils.isNumeric(values[CardInfoIndex.CARD_QUANTITY.getValue()]) ?
+                                values[CardInfoIndex.CARD_QUANTITY.getValue()] :
+                                "1";
+                int cardQuantity = Integer.parseInt(quantityString);
+
                 cardInfo.add(new CardInfo(cardImageName, cardName,
                         cardDescription, cardQuantity));
             }
