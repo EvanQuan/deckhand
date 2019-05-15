@@ -6,6 +6,14 @@ package com.github.evanquan.deckhand.cards;
 public class Board {
 
     /**
+     * @param mainDeck to add
+     */
+    public Board(Deck mainDeck) {
+        this.mainDeck = mainDeck;
+        this.discardPile = new Deck();
+        this.cardsInPlay = new Deck();
+    }
+    /**
      * Main deck to drawFromTop from.
      */
     private Deck mainDeck;

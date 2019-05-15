@@ -164,7 +164,7 @@ public class DeckReader {
      * order to generate card info.
      *
      * @param images gathered from image files
-     * @throws Exception ifl the images, names, and descriptions do not have the
+     * @throws Exception if the images, names, and descriptions do not have the
      *                   correct counts in order to create a {@link Deck} of
      *                   {@link Card}s.
      */

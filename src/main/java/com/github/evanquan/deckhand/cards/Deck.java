@@ -11,6 +11,12 @@ import java.util.Collections;
 public class Deck extends ArrayList<Card> {
 
     /**
+     * Create an empty deck containing no {@link Card}s.
+     */
+    public Deck() {
+    }
+
+    /**
      * Randomly permutes the specified list using a default source of
      * randomness. All permutations occur with approximately equal likelihood.
      * The hedge "approximately" is used in the foregoing description because
