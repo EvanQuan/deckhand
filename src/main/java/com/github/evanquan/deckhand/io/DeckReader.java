@@ -21,6 +21,15 @@ import java.util.Objects;
  */
 public class DeckReader {
 
+    /**
+     * Zero-width no-break spaces can appear in CSVs. They are not visible
+     * (hence zero-width), but still take up a character in {@link String}s.
+     * <p>
+     * This causes a problem for checking for String equality when evaluating
+     * image names.
+     * <p>
+     * Their unicode value is 65279.
+     */
     private static final String ZERO_WIDTH_NO_BREAK_SPACE =
             Character.toString((char) 65279);
 
@@ -47,9 +56,8 @@ public class DeckReader {
 
     private static final ArrayList<String> VALID_IMAGE_EXTENSIONS =
             new ArrayList<>(Arrays.asList("png", "jpg"));
-    private static final String COMMA_DELIMITER = ",";
     private static final String DEFAULT_CARD_DESCRIPTION = "";
-    private static final int DEFAULT_CARD_QUANTITY = 1;
+    private static final String DEFAULT_CARD_QUANTITY = "1";
 
     private static DeckReader instance = new DeckReader();
 
@@ -81,7 +89,7 @@ public class DeckReader {
 
     /**
      * @param directoryToSearch for images and csv
-     * @param csvName containing card info
+     * @param csvName           containing card info
      * @return a {@link Deck} of {@link Card}s gathered from the image files and
      * CSV values.
      * @throws Exception if the information from the files is not configured
@@ -126,7 +134,7 @@ public class DeckReader {
                                 && !values[CardInfoIndex.CARD_QUANTITY.getValue()].isEmpty()
                                 && StringUtils.isNumeric(values[CardInfoIndex.CARD_QUANTITY.getValue()]) ?
                                 values[CardInfoIndex.CARD_QUANTITY.getValue()] :
-                                "1";
+                                DEFAULT_CARD_QUANTITY;
                 int cardQuantity = Integer.parseInt(quantityString);
 
                 cardInfo.add(new CardInfo(cardImageName, cardName,
@@ -155,9 +163,10 @@ public class DeckReader {
      * Check if the card info gathered from the files is of a valid count in
      * order to generate card info.
      *
-     * @param images       gathered from image files
-     * @throws Exception ifl the images, names, and descriptions do not have
-     * the correct counts in order to create a {@link Deck} of {@link Card}s.
+     * @param images gathered from image files
+     * @throws Exception ifl the images, names, and descriptions do not have the
+     *                   correct counts in order to create a {@link Deck} of
+     *                   {@link Card}s.
      */
     private void checkAllCardsHaveExistingImage(HashMap<String, File> images,
                                                 ArrayList<CardInfo> cardInfo) throws Exception {
@@ -174,7 +183,6 @@ public class DeckReader {
     }
 
     /**
-     *
      * @param file to get the extension from
      * @return the file extension of the file, or empty string if there is no
      * file extension.
@@ -220,6 +228,7 @@ public class DeckReader {
                 + (directoryToSearch.endsWith("/") ? "" : "/")
                 + csvName;
     }
+
     /**
      * Index values from CSV
      */
