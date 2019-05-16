@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.net.URL;
+
 public class Main extends Application {
 //public class Main {
 
@@ -26,7 +28,10 @@ public class Main extends Application {
     private static final String CSV_PATH = DECK_PATH + "/" + CSV_NAME;
 
     private static final String TITLE = "Hello World";
-    private static final String RESOURCE = "sample.fxml";
+    /**
+     * The .fxml file is placed with resources directory as the root.
+     */
+    private static final String RESOURCE = "/sample.fxml";
 
     public static void main(String[] args) {
 //        Scanner in = new Scanner(System.in);
@@ -42,10 +47,14 @@ public class Main extends Application {
 
     //    @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource(RESOURCE));
+        URL resource = getClass().getResource(RESOURCE);
+        System.out.println("resource " + (resource == null ? "is null" :
+                "was found"));
+//        Parent root = FXMLLoader.load(getClass().getResource(RESOURCE));
+        assert resource != null;
 
-        String current = new java.io.File(".").getCanonicalPath();
-        System.out.println("Current dir: " + current);
+        Parent root = FXMLLoader.load(resource);
+
         primaryStage.setTitle(TITLE);
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();
