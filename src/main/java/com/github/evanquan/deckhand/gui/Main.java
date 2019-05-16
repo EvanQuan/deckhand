@@ -10,7 +10,6 @@ import javafx.stage.Stage;
 import java.net.URL;
 
 public class Main extends Application {
-//public class Main {
 
     /**
      * All {@link Deck} information must be contained within a directory of a
@@ -33,6 +32,9 @@ public class Main extends Application {
      */
     private static final String RESOURCE = "/sample.fxml";
 
+    public Main() {
+    }
+
     public static void main(String[] args) {
 //        Scanner in = new Scanner(System.in);
 //        String message;
@@ -54,6 +56,9 @@ public class Main extends Application {
         assert resource != null;
 
         Parent root = FXMLLoader.load(resource);
+
+//        primaryStage.setScene(new Scene(new Pane(), 800, 600));
+//        primaryStage.show();
 
         primaryStage.setTitle(TITLE);
         primaryStage.setScene(new Scene(root, 300, 275));
