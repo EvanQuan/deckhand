@@ -25,8 +25,12 @@ public class Main extends Application {
     private static final String DECK_PATH = "./" + DECK_DIRECTORY_NAME;
     private static final String IMAGE_PATH = DECK_PATH + "/" + IMAGE_DIRECTORY_NAME;
     private static final String CSV_PATH = DECK_PATH + "/" + CSV_NAME;
+    private static final int MIN_WIDTH = 450;
+    private static final int MIN_HEIGHT = 250;
+    private static final int START_WIDTH = MIN_WIDTH;
+    private static final int START_HEIGHT = MIN_HEIGHT;
 
-    private static final String TITLE = "Hello World";
+    private static final String TITLE = "Deckhand";
     /**
      * The .fxml file is placed with resources directory as the root.
      */
@@ -61,7 +65,9 @@ public class Main extends Application {
 //        primaryStage.show();
 
         primaryStage.setTitle(TITLE);
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, START_WIDTH, START_HEIGHT));
+        primaryStage.setMinWidth(MIN_WIDTH);
+        primaryStage.setMinHeight(MIN_HEIGHT);
         primaryStage.show();
     }
 }
