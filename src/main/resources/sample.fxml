@@ -3,11 +3,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" hgap="20.0"
-          minHeight="200.0" minWidth="700.0" prefHeight="300.0"
-          prefWidth="700.0" vgap="20.0"
+          minHeight="200.0" minWidth="400.0" prefHeight="200.0"
+          prefWidth="400.0" vgap="20.0"
           xmlns="http://javafx.com/javafx/8.0.172-ea"
           fx:controller="com.github.evanquan.deckhand.gui.Controller">
     <columnConstraints>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
+        <ColumnConstraints/>
         <ColumnConstraints/>
         <ColumnConstraints/>
         <ColumnConstraints/>
@@ -16,25 +19,43 @@
     <rowConstraints>
         <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0"/>
         <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0"/>
+        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0"/>
+        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0"/>
         <RowConstraints/>
         <RowConstraints/>
         <RowConstraints/>
         <RowConstraints/>
     </rowConstraints>
-    <Label text="Deck" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <Label contentDisplay="CENTER" text="Deck" textAlignment="CENTER"
+           GridPane.columnIndex="1" GridPane.columnSpan="2"
+           GridPane.halignment="CENTER" GridPane.rowIndex="2"/>
     <ProgressBar prefHeight="18.0" prefWidth="102.0" progress="0.0"
                  GridPane.columnIndex="1" GridPane.columnSpan="2"
-                 GridPane.rowIndex="2"/>
+                 GridPane.rowIndex="4"/>
     <Button fx:id="btn_msg" alignment="CENTER" contentDisplay="CENTER"
-            mnemonicParsing="false" onAction="#pressButton" prefHeight="25.0"
-            prefWidth="53.0" text="Draw" textAlignment="CENTER"
-            GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+            mnemonicParsing="false" onAction="#pressButton" prefWidth="50.0"
+            text="Draw" textAlignment="CENTER" GridPane.columnIndex="1"
+            GridPane.rowIndex="6"/>
     <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="102.0"
             text="Shuffle" GridPane.columnIndex="1" GridPane.columnSpan="2"
-            GridPane.rowIndex="3"/>
-    <TextField prefHeight="25.0" prefWidth="19.0" GridPane.columnIndex="2"
-               GridPane.rowIndex="4"/>
-    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="105.0"
-            text="Undo" GridPane.columnIndex="3"
-            GridPane.columnSpan="2147483647" GridPane.rowIndex="1"/>
+            GridPane.rowIndex="5"/>
+    <TextField prefHeight="25.0" prefWidth="25.0" GridPane.columnIndex="2"
+               GridPane.rowIndex="6"/>
+    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="131.0"
+            text="Undo" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="95.0"
+            text="Shuffle" GridPane.columnIndex="4" GridPane.columnSpan="2"
+            GridPane.rowIndex="5"/>
+    <Button mnemonicParsing="false" prefWidth="50.0" text="Draw"
+            GridPane.columnIndex="4" GridPane.rowIndex="6"/>
+    <TextField prefHeight="25.0" prefWidth="25.0" GridPane.columnIndex="5"
+               GridPane.rowIndex="6"/>
+    <TextArea editable="false" prefHeight="121.0" prefWidth="131.0"
+              GridPane.columnIndex="3" GridPane.rowIndex="4"
+              GridPane.rowSpan="3"/>
+    <ProgressBar prefHeight="18.0" prefWidth="96.0" progress="0.0"
+                 GridPane.columnIndex="4" GridPane.columnSpan="2"
+                 GridPane.rowIndex="4"/>
+    <Label text="Discards" GridPane.columnIndex="4" GridPane.columnSpan="2"
+           GridPane.halignment="CENTER" GridPane.rowIndex="2"/>
 </GridPane>
