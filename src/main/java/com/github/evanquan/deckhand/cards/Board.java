@@ -53,4 +53,11 @@ public class Board {
         discardPile.shuffle();
         mainDeck.addToTop(discardPile);
     }
+
+    /**
+     * Undo the last action. This reverts the board state.
+     */
+    public void undoLastMove() {
+
+    }
 }

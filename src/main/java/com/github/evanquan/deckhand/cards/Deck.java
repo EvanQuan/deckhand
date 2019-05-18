@@ -1,14 +1,14 @@
 package com.github.evanquan.deckhand.cards;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Stack;
 
 /**
  * A deck of {@link Card}s.
  *
  * @author Evan Quan
  */
-public class Deck extends ArrayList<Card> {
+public class Deck extends Stack<Card> {
 
     /**
      * Create an empty deck containing no {@link Card}s.
@@ -45,7 +45,7 @@ public class Deck extends ArrayList<Card> {
      *              emptied.
      */
     public void addToTop(Deck other) {
-        this.addAll(0, other);
+        this.addAll(other);
         other.clear();
     }
 
@@ -65,7 +65,7 @@ public class Deck extends ArrayList<Card> {
      * @return the top card drawn from this deck.
      */
     public Card drawFromTop() {
-        return this.remove(0);
+        return this.pop();
     }
 
     /**
@@ -74,6 +74,6 @@ public class Deck extends ArrayList<Card> {
      * @param card to add to the top of this deck.
      */
     public void addToTop(Card card) {
-        this.add(0, card);
+        this.push(card);
     }
 }
