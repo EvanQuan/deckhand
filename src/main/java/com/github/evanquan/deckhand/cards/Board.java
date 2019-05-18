@@ -60,4 +60,8 @@ public class Board {
     public void undoLastMove() {
 
     }
+
+    public void reset() {
+
+    }
 }

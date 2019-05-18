@@ -89,17 +89,17 @@ public class DeckReader {
 
     /**
      * @param imageDirectory for images
-     * @param csvDirectory   containing card info
+     * @param csvPath   containing card info
      * @return a {@link Deck} of {@link Card}s gathered from the image files and
      * CSV values.
      * @throws Exception if the information from the files is not configured
      *                   correctly.
      */
     public Deck getDeck(String imageDirectory,
-                        String csvDirectory) throws Exception {
+                        String csvPath) throws Exception {
         HashMap<String, File> images = getImages(imageDirectory);
         ArrayList<CardInfo> cardInfo =
-                getCardInfo(csvDirectory);
+                getCardInfo(csvPath);
 
         checkAllCardsHaveExistingImage(images, cardInfo);
 
