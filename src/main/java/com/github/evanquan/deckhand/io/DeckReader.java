@@ -88,18 +88,18 @@ public class DeckReader {
     }
 
     /**
-     * @param directoryToSearch for images and csv
-     * @param csvName           containing card info
+     * @param imageDirectory for images
+     * @param csvDirectory   containing card info
      * @return a {@link Deck} of {@link Card}s gathered from the image files and
      * CSV values.
      * @throws Exception if the information from the files is not configured
      *                   correctly.
      */
-    public Deck getDeck(String directoryToSearch,
-                        String csvName) throws Exception {
-        HashMap<String, File> images = getImages(directoryToSearch);
+    public Deck getDeck(String imageDirectory,
+                        String csvDirectory) throws Exception {
+        HashMap<String, File> images = getImages(imageDirectory);
         ArrayList<CardInfo> cardInfo =
-                getCardInfo(getCSVPath(directoryToSearch, csvName));
+                getCardInfo(csvDirectory);
 
         checkAllCardsHaveExistingImage(images, cardInfo);
 
@@ -151,7 +151,8 @@ public class DeckReader {
 
         for (CardInfo info : cardInfo) {
             for (int i = 0; i < info.getQuantity(); i++) {
-                deck.add(new Card(info.getCardName(), info.getCardDescription(),
+                deck.addToTop(new Card(info.getCardName(),
+                        info.getCardDescription(),
                         images.get(info.getImageName())));
             }
         }

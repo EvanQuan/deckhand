@@ -10,13 +10,15 @@ import static org.junit.Assert.assertEquals;
 
 public class DeckReaderTest {
 
+    private static final String csvName = "test.csv";
     private static final String testPath = "./src/test/java/test/";
     private static final String noImagePath = testPath + "/noimages";
     private static final String validPath = testPath + "/valid";
+    private static final String validCSV = validPath + "/" + csvName;
     private static final String descHasCommasPath = testPath + "/descHasCommas";
+    private static final String descHasCommasCSV = descHasCommasPath + "/" + csvName;
     private static final String validPathTrailing = validPath + "/";
     private static final String invalidPath = "";
-    private static final String csvName = "test.csv";
 
     private DeckReader reader;
     private Deck deck;
@@ -38,34 +40,34 @@ public class DeckReaderTest {
 
     @Test(expected = Exception.class)
     public void getDeck_noImages() throws Exception {
-        deck = reader.getDeck(noImagePath, csvName);
+        deck = reader.getDeck(noImagePath, noImagePath + csvName);
     }
 
     @Test
     public void getDeck_valid_success() throws Exception {
-        deck = reader.getDeck(validPath, csvName);
+        deck = reader.getDeck(validPath, validCSV);
         deckEqualsValidDeck(deck);
     }
 
     @Test
     public void getDeck_descHasCommas_success() throws Exception {
-        deck = reader.getDeck(descHasCommasPath, csvName);
+        deck = reader.getDeck(descHasCommasPath, descHasCommasCSV);
         deckEqualsDescHasCommasDeck(deck);
     }
 
     @Test
     public void getDeck_validTrailing_success() throws Exception {
-        deck = reader.getDeck(validPathTrailing, csvName);
+        deck = reader.getDeck(validPathTrailing, validCSV);
         deckEqualsValidDeck(deck);
     }
 
     private void deckEqualsValidDeck(Deck deck) {
         assertEquals(5, deck.size());
-        Card a1 = deck.drawFromTop();
-        Card a2 = deck.drawFromTop();
-        Card a3 = deck.drawFromTop();
-        Card b = deck.drawFromTop();
         Card c = deck.drawFromTop();
+        Card b = deck.drawFromTop();
+        Card a3 = deck.drawFromTop();
+        Card a2 = deck.drawFromTop();
+        Card a1 = deck.drawFromTop();
 
         assertEquals("1.png", a1.getImage().getName());
         assertEquals("1.png", a2.getImage().getName());
@@ -88,11 +90,11 @@ public class DeckReaderTest {
 
     private void deckEqualsDescHasCommasDeck(Deck deck) {
         assertEquals(5, deck.size());
-        Card a1 = deck.drawFromTop();
-        Card a2 = deck.drawFromTop();
-        Card a3 = deck.drawFromTop();
-        Card b = deck.drawFromTop();
         Card c = deck.drawFromTop();
+        Card b = deck.drawFromTop();
+        Card a3 = deck.drawFromTop();
+        Card a2 = deck.drawFromTop();
+        Card a1 = deck.drawFromTop();
 
         assertEquals("1.png", a1.getImage().getName());
         assertEquals("1.png", a2.getImage().getName());

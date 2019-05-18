@@ -11,16 +11,16 @@ import com.github.evanquan.deckhand.io.DeckReader;
  */
 public class Game {
 
-    DeckReader reader;
+    private DeckReader reader;
     Deck deck;
     Board board;
 
     private Game() {
-
+        reader = DeckReader.getInstance();
     }
 
     public void reset() {
-
+//        reader.getDeck()
     }
 
 
