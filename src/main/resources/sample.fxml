@@ -31,31 +31,37 @@
     <Label contentDisplay="CENTER" text="Deck" textAlignment="CENTER"
            GridPane.columnIndex="1" GridPane.columnSpan="2"
            GridPane.halignment="CENTER" GridPane.rowIndex="3"/>
-    <ProgressBar prefHeight="18.0" prefWidth="120.0" progress="0.0"
-                 GridPane.columnIndex="1" GridPane.columnSpan="2"
+    <ProgressBar fx:id="mainDeckProgressBar" prefHeight="18.0" prefWidth="120.0"
+                 progress="0.0" GridPane.columnIndex="1" GridPane.columnSpan="2"
                  GridPane.rowIndex="4"/>
-    <Button fx:id="btn_msg" alignment="CENTER" contentDisplay="CENTER"
-            minWidth="50.0" mnemonicParsing="false" onAction="#pressButton"
-            prefWidth="50.0" text="Draw" textAlignment="CENTER"
-            GridPane.columnIndex="1" GridPane.rowIndex="7"/>
-    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0"
+    <Button fx:id="mainDeckDrawButton" alignment="CENTER"
+            contentDisplay="CENTER" minWidth="50.0" mnemonicParsing="false"
+            onAction="#drawFromMainDeck" prefWidth="50.0" text="Draw"
+            textAlignment="CENTER" GridPane.columnIndex="1"
+            GridPane.rowIndex="7"/>
+    <Button fx:id="mainDeckShuffleButton" mnemonicParsing="false"
+            onAction="#shuffleMainDeck" prefHeight="25.0" prefWidth="120.0"
             text="Shuffle" GridPane.columnIndex="1" GridPane.columnSpan="2"
             GridPane.rowIndex="6"/>
-    <TextField minWidth="50.0" prefHeight="25.0" prefWidth="50.0"
-               GridPane.columnIndex="2" GridPane.rowIndex="7"/>
-    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0"
+    <TextField fx:id="drawMainDeckField" minWidth="50.0" prefHeight="25.0"
+               prefWidth="50.0" promptText="1" GridPane.columnIndex="2"
+               GridPane.rowIndex="7"/>
+    <Button fx:id="discardsShuffleButton" mnemonicParsing="false"
+            onAction="#shuffleDiscards" prefHeight="25.0" prefWidth="120.0"
             text="Shuffle" GridPane.columnIndex="4" GridPane.columnSpan="2"
             GridPane.rowIndex="6"/>
-    <Button minWidth="50.0" mnemonicParsing="false" prefWidth="50.0" text="Draw"
+    <Button fx:id="discardsDrawButton" minWidth="50.0" mnemonicParsing="false"
+            onAction="#drawFromDiscards" prefWidth="50.0" text="Draw"
             GridPane.columnIndex="4" GridPane.rowIndex="7"/>
-    <TextField minWidth="50.0" prefHeight="25.0" prefWidth="50.0"
-               GridPane.columnIndex="5" GridPane.rowIndex="7"/>
+    <TextField fx:id="drawDiscardsField" minWidth="50.0" prefHeight="25.0"
+               prefWidth="50.0" promptText="1" GridPane.columnIndex="5"
+               GridPane.rowIndex="7"/>
     <TextArea editable="false" maxHeight="1.7976931348623157E308"
               maxWidth="1.7976931348623157E308" minWidth="50.0"
               GridPane.columnIndex="3" GridPane.hgrow="ALWAYS"
               GridPane.rowIndex="3" GridPane.rowSpan="5"/>
-    <ProgressBar prefHeight="18.0" prefWidth="120.0" progress="0.0"
-                 GridPane.columnIndex="4" GridPane.columnSpan="2"
+    <ProgressBar fx:id="discardsProgressBar" prefHeight="18.0" prefWidth="120.0"
+                 progress="0.0" GridPane.columnIndex="4" GridPane.columnSpan="2"
                  GridPane.rowIndex="4"/>
     <Label text="Discards" GridPane.columnIndex="4" GridPane.columnSpan="2"
            GridPane.halignment="CENTER" GridPane.rowIndex="3"/>
@@ -85,7 +91,8 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Game">
                 <items>
-                    <MenuItem mnemonicParsing="false" text="Start New Game">
+                    <MenuItem mnemonicParsing="false" onAction="#printHi"
+                              text="Start New Game">
                         <accelerator>
                             <KeyCodeCombination alt="UP" code="N" control="DOWN"
                                                 meta="UP" shift="UP"
@@ -103,14 +110,16 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                 <items>
-                    <MenuItem mnemonicParsing="false" text="About">
+                    <MenuItem mnemonicParsing="false" onAction="#about"
+                              text="About">
                         <accelerator>
                             <KeyCodeCombination alt="UP" code="A" control="DOWN"
                                                 meta="UP" shift="UP"
                                                 shortcut="UP"/>
                         </accelerator>
                     </MenuItem>
-                    <MenuItem mnemonicParsing="false" text="How to Use">
+                    <MenuItem mnemonicParsing="false" onAction="#howToUse"
+                              text="How to Use">
                         <accelerator>
                             <KeyCodeCombination alt="UP" code="H" control="DOWN"
                                                 meta="UP" shift="UP"
