@@ -43,7 +43,8 @@
             onAction="#shuffleMainDeck" prefHeight="25.0" prefWidth="120.0"
             text="Shuffle" GridPane.columnIndex="1" GridPane.columnSpan="2"
             GridPane.rowIndex="6"/>
-    <TextField fx:id="drawMainDeckField" minWidth="50.0" prefHeight="25.0"
+    <TextField fx:id="drawMainDeckField" minWidth="50.0"
+               onKeyTyped="#validateMainDeckDrawField" prefHeight="25.0"
                prefWidth="50.0" promptText="1" GridPane.columnIndex="2"
                GridPane.rowIndex="7"/>
     <Button fx:id="discardsShuffleButton" mnemonicParsing="false"
@@ -53,7 +54,8 @@
     <Button fx:id="discardsDrawButton" minWidth="50.0" mnemonicParsing="false"
             onAction="#drawFromDiscards" prefWidth="50.0" text="Draw"
             GridPane.columnIndex="4" GridPane.rowIndex="7"/>
-    <TextField fx:id="drawDiscardsField" minWidth="50.0" prefHeight="25.0"
+    <TextField fx:id="drawDiscardsField" minWidth="50.0"
+               onKeyTyped="#validateDiscardsDrawField" prefHeight="25.0"
                prefWidth="50.0" promptText="1" GridPane.columnIndex="5"
                GridPane.rowIndex="7"/>
     <TextArea editable="false" maxHeight="1.7976931348623157E308"

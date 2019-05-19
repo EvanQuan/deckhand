@@ -8,6 +8,7 @@ public class Controller {
 
     private static final String POSITIVE_INT_PATTERN = "\\d+";
     private static final int DEFAULT_CARD_DRAW = 1;
+    private static final String NON_DIGIT_PATTERN = "[^\\d]";
 
     public TextField drawMainDeckField;
     public TextField drawDiscardsField;
@@ -46,18 +47,39 @@ public class Controller {
     }
 
     public void drawFromMainDeck() {
-        int count =
-                parseIntWithDefault(drawMainDeckField.getCharacters().toString());
+        int count = parseIntWithDefault(drawMainDeckField.getText());
         System.out.println("Draw " + count + " cards from main deck");
     }
 
     public void drawFromDiscards() {
-        int count = parseIntWithDefault(drawMainDeckField.getCharacters().toString());
+        int count = parseIntWithDefault(drawMainDeckField.getText());
         System.out.println("Draw " + count + " cards from discards");
     }
 
     private int parseIntWithDefault(String s) {
         return s.matches(POSITIVE_INT_PATTERN) ? Integer.parseInt(s) : Controller.DEFAULT_CARD_DRAW;
+    }
+
+    private void validateTextField(TextField field) {
+        if (!field.getText().matches(POSITIVE_INT_PATTERN)) {
+            field.setText(stripNonNumerics(field.getText()));
+        }
+    }
+
+    public void validateMainDeckDrawField() {
+        validateTextField(drawMainDeckField);
+    }
+
+    public void validateDiscardsDrawField() {
+        validateTextField(drawDiscardsField);
+    }
+
+    private void clearTextField(TextField field) {
+        field.clear();
+    }
+
+    private String stripNonNumerics(String s) {
+        return s.replaceAll(NON_DIGIT_PATTERN, "");
     }
 
 }
