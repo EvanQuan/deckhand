@@ -2,8 +2,10 @@ package com.github.evanquan.deckhand.gui;
 
 import com.github.evanquan.deckhand.game.Game;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class Controller {
 
@@ -23,6 +25,8 @@ public class Controller {
     public Button discardsShuffleButton;
     public Button discardsDrawButton;
     public ProgressBar discardsProgressBar;
+    public Button warningConfirmationButton;
+    public Label warningLabel;
 
     private Game game;
     private String imageDirectory = null;
@@ -90,7 +94,7 @@ public class Controller {
 
     private void validateTextField(TextField field) {
         if (!field.getText().matches(POSITIVE_INT_PATTERN)) {
-            field.setText(stripNonNumerics(field.getText()));
+            field.setText(stripNonDigits(field.getText()));
         }
     }
 
@@ -102,7 +106,7 @@ public class Controller {
         validateTextField(drawDiscardsField);
     }
 
-    private String stripNonNumerics(String s) {
+    private String stripNonDigits(String s) {
         return s.replaceAll(NON_DIGIT_PATTERN, "");
     }
 
@@ -111,4 +115,26 @@ public class Controller {
     }
 
 
+    public void closeWarningWindow() {
+        closeWindow(warningConfirmationButton);
+    }
+
+    private void closeWindow(Button button) {
+        Stage stage = (Stage) button.getScene().getWindow();
+
+        stage.close();
+    }
+
+    /**
+     * Open the warning window is a specified message.
+     *
+     * @param warningMessage to set when the warning window opens
+     */
+    public void openWarningWindow(String warningMessage) {
+
+    }
+
+    private void setWarningLabel(String s) {
+        warningLabel.setText(s);
+    }
 }

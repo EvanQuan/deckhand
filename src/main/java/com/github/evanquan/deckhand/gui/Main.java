@@ -8,8 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.net.URL;
-
 public class Main extends Application {
 
     /**
@@ -42,7 +40,7 @@ public class Main extends Application {
     /**
      * The .fxml file is placed with resources directory as the root.
      */
-    private static final String RESOURCE = "/sample.fxml";
+    private static final String MAIN_SCENE_FILE = "/main_scene.fxml";
 
     public Main() {
     }
@@ -61,13 +59,7 @@ public class Main extends Application {
 
     //    @Override
     public void start(Stage primaryStage) throws Exception {
-        URL resource = getClass().getResource(RESOURCE);
-        System.out.println("resource " + (resource == null ? "is null" :
-                "was found"));
-//        Parent root = FXMLLoader.load(getClass().getResource(RESOURCE));
-        assert resource != null;
-
-        Parent root = FXMLLoader.load(resource);
+        Parent root = FXMLLoader.load(getClass().getResource(MAIN_SCENE_FILE));
 
 //        primaryStage.setScene(new Scene(new Pane(), 800, 600));
 //        primaryStage.show();
