@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" hgap="20.0"
           minHeight="250.0" minWidth="600.0" prefHeight="250.0"
@@ -66,17 +67,56 @@
         <menus>
             <Menu mnemonicParsing="false" text="File">
                 <items>
-                    <MenuItem mnemonicParsing="false" text="Close"/>
+                    <MenuItem mnemonicParsing="false" text="Open Deck">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" code="D" control="DOWN"
+                                                meta="UP" shift="UP"
+                                                shortcut="UP"/>
+                        </accelerator>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" text="Open Images">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" code="I" control="DOWN"
+                                                meta="UP" shift="UP"
+                                                shortcut="UP"/>
+                        </accelerator>
+                    </MenuItem>
                 </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Edit">
+            <Menu mnemonicParsing="false" text="Game">
                 <items>
-                    <MenuItem mnemonicParsing="false" text="Delete"/>
+                    <MenuItem mnemonicParsing="false" text="Start New Game">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" code="N" control="DOWN"
+                                                meta="UP" shift="UP"
+                                                shortcut="UP"/>
+                        </accelerator>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" text="Undo Last Action">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" code="U" control="DOWN"
+                                                meta="UP" shift="UP"
+                                                shortcut="UP"/>
+                        </accelerator>
+                    </MenuItem>
                 </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                 <items>
-                    <MenuItem mnemonicParsing="false" text="About"/>
+                    <MenuItem mnemonicParsing="false" text="About">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" code="A" control="DOWN"
+                                                meta="UP" shift="UP"
+                                                shortcut="UP"/>
+                        </accelerator>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" text="How to Use">
+                        <accelerator>
+                            <KeyCodeCombination alt="UP" code="H" control="DOWN"
+                                                meta="UP" shift="UP"
+                                                shortcut="UP"/>
+                        </accelerator>
+                    </MenuItem>
                 </items>
             </Menu>
         </menus>
