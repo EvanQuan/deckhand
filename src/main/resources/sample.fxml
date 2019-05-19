@@ -39,25 +39,26 @@
                  GridPane.columnIndex="1" GridPane.columnSpan="2"
                  GridPane.rowIndex="5"/>
     <Button fx:id="btn_msg" alignment="CENTER" contentDisplay="CENTER"
-            mnemonicParsing="false" onAction="#pressButton" prefWidth="50.0"
-            text="Draw" textAlignment="CENTER" GridPane.columnIndex="1"
-            GridPane.rowIndex="9"/>
+            minWidth="50.0" mnemonicParsing="false" onAction="#pressButton"
+            prefWidth="50.0" text="Draw" textAlignment="CENTER"
+            GridPane.columnIndex="1" GridPane.rowIndex="9"/>
     <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0"
             text="Shuffle" GridPane.columnIndex="1" GridPane.columnSpan="2"
             GridPane.rowIndex="7"/>
-    <TextField prefHeight="25.0" prefWidth="50.0" GridPane.columnIndex="2"
-               GridPane.rowIndex="9"/>
-    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0"
-            text="Undo" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+    <TextField minWidth="50.0" prefHeight="25.0" prefWidth="50.0"
+               GridPane.columnIndex="2" GridPane.rowIndex="9"/>
+    <Button minWidth="50.0" mnemonicParsing="false" prefHeight="25.0"
+            prefWidth="53.0" text="Undo" GridPane.columnIndex="2"
+            GridPane.rowIndex="2"/>
     <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0"
             text="Shuffle" GridPane.columnIndex="4" GridPane.columnSpan="2"
             GridPane.rowIndex="7"/>
-    <Button mnemonicParsing="false" prefWidth="50.0" text="Draw"
+    <Button minWidth="50.0" mnemonicParsing="false" prefWidth="50.0" text="Draw"
             GridPane.columnIndex="4" GridPane.rowIndex="9"/>
-    <TextField prefHeight="25.0" prefWidth="25.0" GridPane.columnIndex="5"
-               GridPane.rowIndex="9"/>
-    <TextArea editable="false" prefHeight="85.0" prefWidth="300.0"
-              GridPane.columnIndex="3" GridPane.rowIndex="3"
+    <TextField minWidth="50.0" prefHeight="25.0" prefWidth="50.0"
+               GridPane.columnIndex="5" GridPane.rowIndex="9"/>
+    <TextArea editable="false" minWidth="50.0" prefHeight="85.0"
+              prefWidth="300.0" GridPane.columnIndex="3" GridPane.rowIndex="3"
               GridPane.rowSpan="8"/>
     <ProgressBar prefHeight="18.0" prefWidth="120.0" progress="0.0"
                  GridPane.columnIndex="4" GridPane.columnSpan="2"
@@ -66,8 +67,9 @@
            GridPane.halignment="CENTER" GridPane.rowIndex="4"/>
     <Label contentDisplay="CENTER" text="History" GridPane.columnIndex="3"
            GridPane.halignment="CENTER" GridPane.rowIndex="2"/>
-    <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0"
-            text="Reset" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <Button minWidth="50.0" mnemonicParsing="false" prefHeight="25.0"
+            prefWidth="51.0" text="Reset" GridPane.columnIndex="1"
+            GridPane.rowIndex="2"/>
     <ScrollBar orientation="VERTICAL" prefWidth="14.0" GridPane.columnIndex="3"
                GridPane.rowIndex="3" GridPane.rowSpan="8"/>
 </GridPane>
