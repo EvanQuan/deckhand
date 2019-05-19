@@ -45,7 +45,7 @@
     <TextField minWidth="50.0" prefHeight="25.0" prefWidth="50.0"
                GridPane.columnIndex="2" GridPane.rowIndex="7"/>
     <Button minWidth="50.0" mnemonicParsing="false" prefHeight="25.0"
-            prefWidth="53.0" text="Undo" GridPane.columnIndex="2"
+            prefWidth="50.0" text="Undo" GridPane.columnIndex="2"
             GridPane.rowIndex="1"/>
     <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0"
             text="Shuffle" GridPane.columnIndex="4" GridPane.columnSpan="2"
@@ -66,7 +66,7 @@
     <Label contentDisplay="CENTER" text="History" GridPane.columnIndex="3"
            GridPane.halignment="CENTER" GridPane.rowIndex="1"/>
     <Button minWidth="50.0" mnemonicParsing="false" prefHeight="25.0"
-            prefWidth="51.0" text="Reset" GridPane.columnIndex="1"
+            prefWidth="50.0" text="Reset" GridPane.columnIndex="1"
             GridPane.rowIndex="1"/>
     <ScrollBar orientation="VERTICAL" prefWidth="14.0" GridPane.columnIndex="3"
                GridPane.rowIndex="2" GridPane.rowSpan="8"/>
