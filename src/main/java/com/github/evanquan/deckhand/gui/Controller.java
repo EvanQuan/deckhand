@@ -1,5 +1,6 @@
 package com.github.evanquan.deckhand.gui;
 
+import com.github.evanquan.deckhand.game.Game;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
@@ -9,6 +10,10 @@ public class Controller {
     private static final String POSITIVE_INT_PATTERN = "\\d+";
     private static final int DEFAULT_CARD_DRAW = 1;
     private static final String NON_DIGIT_PATTERN = "[^\\d]";
+    private static final String IMAGE_DIRECTORY_NOT_SET_MESSAGE = "Image " +
+            "directory has not been set.";
+    private static final String CSV_NOT_SET_MESSAGE = "Card info CSV has not " +
+            "been set.";
 
     public TextField drawMainDeckField;
     public TextField drawDiscardsField;
@@ -18,6 +23,10 @@ public class Controller {
     public Button discardsShuffleButton;
     public Button discardsDrawButton;
     public ProgressBar discardsProgressBar;
+
+    private Game game;
+    private String imageDirectory = null;
+    private String csvPath = null;
 
     public Controller() {
     }
@@ -42,9 +51,28 @@ public class Controller {
         System.out.println("Hi");
     }
 
-    public void undo() {
+    public void undoLastAction() {
 
     }
+
+    public void startNewGame() {
+
+        if (imageDirectory == null) {
+            warn(IMAGE_DIRECTORY_NOT_SET_MESSAGE);
+            return;
+        }
+        if (csvPath == null) {
+            warn(CSV_NOT_SET_MESSAGE);
+            return;
+        }
+        try {
+            game = new Game(imageDirectory, csvPath);
+        } catch (Exception e) {
+            warn(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 
     public void drawFromMainDeck() {
         int count = parseIntWithDefault(drawMainDeckField.getText());
@@ -74,12 +102,13 @@ public class Controller {
         validateTextField(drawDiscardsField);
     }
 
-    private void clearTextField(TextField field) {
-        field.clear();
-    }
-
     private String stripNonNumerics(String s) {
         return s.replaceAll(NON_DIGIT_PATTERN, "");
     }
+
+    private void warn(String warningMessage) {
+        System.out.println(warningMessage);
+    }
+
 
 }

@@ -11,8 +11,6 @@ import com.github.evanquan.deckhand.io.DeckReader;
  */
 public class Game {
 
-    private DeckReader reader;
-    private Deck deck;
     private Board board;
 
     /**
@@ -21,20 +19,16 @@ public class Game {
      * @throws Exception if there is an I/O problem creating a deck from the
      *                   deck files.
      */
-    private Game(String imageDirectory, String csvPath) throws Exception {
-        reader = DeckReader.getInstance();
-        deck = reader.getDeck(imageDirectory, csvPath);
+    public Game(String imageDirectory, String csvPath) throws Exception {
+        Deck deck = DeckReader.getInstance().getDeck(imageDirectory, csvPath);
         board = new Board(deck);
     }
 
     /**
      * Create a new deck from the deck files, and shuffle the cards into the
      * main deck.
-     *
-     * @throws Exception if there is an I/O problem creating a deck from the
-     *                   deck files.
      */
-    public void startNewGame() throws Exception {
+    public void reset() {
         board.reset();
     }
 
