@@ -73,18 +73,18 @@
                GridPane.rowIndex="3" GridPane.rowSpan="5"/>
     <MenuBar GridPane.columnSpan="2147483647" GridPane.rowSpan="2">
         <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" text="Open Deck">
+            <MenuItem mnemonicParsing="false" onAction="#chooseCSVFile"
+                      text="Open Deck Info">
                 <accelerator>
                     <KeyCodeCombination alt="UP" code="D" control="DOWN"
-                                        meta="UP" shift="UP"
-                                        shortcut="UP"/>
+                                        meta="UP" shift="UP" shortcut="UP"/>
                 </accelerator>
             </MenuItem>
-            <MenuItem mnemonicParsing="false" text="Open Images">
+            <MenuItem mnemonicParsing="false" onAction="#chooseCardImages"
+                      text="Open Images">
                 <accelerator>
                     <KeyCodeCombination alt="UP" code="I" control="DOWN"
-                                        meta="UP" shift="UP"
-                                        shortcut="UP"/>
+                                        meta="UP" shift="UP" shortcut="UP"/>
                 </accelerator>
             </MenuItem>
         </Menu>
@@ -93,33 +93,29 @@
                       text="Start New Game">
                 <accelerator>
                     <KeyCodeCombination alt="UP" code="N" control="DOWN"
-                                        meta="UP" shift="UP"
-                                        shortcut="UP"/>
+                                        meta="UP" shift="UP" shortcut="UP"/>
                 </accelerator>
             </MenuItem>
-            <MenuItem mnemonicParsing="false" text="Undo Last Action">
+            <MenuItem mnemonicParsing="false" onAction="#undoLastAction"
+                      text="Undo Last Action">
                 <accelerator>
                     <KeyCodeCombination alt="UP" code="U" control="DOWN"
-                                        meta="UP" shift="UP"
-                                        shortcut="UP"/>
+                                        meta="UP" shift="UP" shortcut="UP"/>
                 </accelerator>
             </MenuItem>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
-            <MenuItem mnemonicParsing="false" onAction="#about"
-                      text="About">
+            <MenuItem mnemonicParsing="false" onAction="#about" text="About">
                 <accelerator>
                     <KeyCodeCombination alt="UP" code="A" control="DOWN"
-                                        meta="UP" shift="UP"
-                                        shortcut="UP"/>
+                                        meta="UP" shift="UP" shortcut="UP"/>
                 </accelerator>
             </MenuItem>
             <MenuItem mnemonicParsing="false" onAction="#howToUse"
                       text="How to Use">
                 <accelerator>
                     <KeyCodeCombination alt="UP" code="H" control="DOWN"
-                                        meta="UP" shift="UP"
-                                        shortcut="UP"/>
+                                        meta="UP" shift="UP" shortcut="UP"/>
                 </accelerator>
             </MenuItem>
         </Menu>

@@ -56,6 +56,7 @@ public class Controller {
     }
 
     public void undoLastAction() {
+        System.out.println("Undo last action");
 
     }
 
@@ -136,5 +137,17 @@ public class Controller {
 
     private void setWarningLabel(String s) {
         warningLabel.setText(s);
+    }
+
+    /**
+     * Choose a csv file for card infomation.
+     */
+    public void chooseCSVFile() {
+        System.out.println("Choose CSV file");
+//        FileChooser fileChooser = new FileChooser();
+    }
+
+    public void chooseCardImages() {
+        System.out.println("Chosoe card images");
     }
 }
