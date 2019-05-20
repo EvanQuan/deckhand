@@ -20,6 +20,13 @@ public class Controller {
     private static final FileChooser.ExtensionFilter CSV_FILTER =
             new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
 
+    /**
+     * Current working directory. The program will automatically start off in
+     * the current working directory when choosing card info and images for
+     * convenience.
+     */
+    private static final File CURRENT_WORKING_DIRECTORY = new File(System.getProperty("user.dir"));
+
     public TextField drawMainDeckField;
     public TextField drawDiscardsField;
     public ProgressBar mainDeckProgressBar;
@@ -50,7 +57,9 @@ public class Controller {
     public Controller() {
         csvChooser = new FileChooser();
         csvChooser.getExtensionFilters().add(CSV_FILTER);
+        csvChooser.setInitialDirectory(CURRENT_WORKING_DIRECTORY);
         imageChooser = new DirectoryChooser();
+        imageChooser.setInitialDirectory(CURRENT_WORKING_DIRECTORY);
     }
 
     public void about() {
@@ -81,17 +90,18 @@ public class Controller {
     public void startNewGame() {
 
         if (imageDirectory == null) {
-            warn(IMAGE_DIRECTORY_NOT_SET_MESSAGE);
+            error(IMAGE_DIRECTORY_NOT_SET_MESSAGE);
             return;
         }
         if (cardInfo == null) {
-            warn(CSV_NOT_SET_MESSAGE);
+            error(CSV_NOT_SET_MESSAGE);
             return;
         }
         try {
+            System.out.println("Start new game");
             game = new Game(imageDirectory, cardInfo);
         } catch (Exception e) {
-            warn(e.getMessage());
+            error(e.getMessage());
             e.printStackTrace();
         }
     }
@@ -131,14 +141,14 @@ public class Controller {
     }
 
     /**
-     * Open a warning dialog box with a specified warning message. The user
+     * Open a warning dialog box with a specified error message. The user
      * cannot continue until they close the dialog box.
      *
-     * @param warningMessage of the dialog box
+     * @param errorMessage of the dialog box
      */
-    private void warn(String warningMessage) {
-        System.out.println(warningMessage);
-        Alert alert = new Alert(Alert.AlertType.ERROR, warningMessage,
+    private void error(String errorMessage) {
+        System.out.println(errorMessage);
+        Alert alert = new Alert(Alert.AlertType.ERROR, errorMessage,
                 ButtonType.OK);
         alert.showAndWait();
 
@@ -179,10 +189,26 @@ public class Controller {
     public void chooseCSVFile() {
         System.out.println("Choose CSV file");
         cardInfo = csvChooser.showOpenDialog(new Stage());
+
+        setCurrentDirectory(cardInfo.getParentFile());
     }
 
     public void chooseCardImages() {
         System.out.println("Choose card images");
         imageDirectory = imageChooser.showDialog(new Stage());
+
+        setCurrentDirectory(imageDirectory.getParentFile());
+    }
+
+    /**
+     * Update the current directory for file choosers.
+     *
+     * @param directory to set as current
+     */
+    private void setCurrentDirectory(File directory) {
+        if (directory != null && directory.isDirectory()) {
+            csvChooser.setInitialDirectory(directory);
+            imageChooser.setInitialDirectory(directory);
+        }
     }
 }
