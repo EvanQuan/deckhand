@@ -12,8 +12,6 @@ class SceneManager {
      * The .fxml file is placed with resources directory as the root.
      */
     private static final String MAIN_SCENE_FILE = "/main_scene.fxml";
-    private static final int MIN_WIDTH_START = 400;
-    private static final int MIN_HEIGHT_START = 225;
     private static SceneManager instance = new SceneManager();
     private static Scene startScene;
     private static Scene gameScene;
@@ -24,14 +22,14 @@ class SceneManager {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(MAIN_SCENE_FILE));
             assert root != null;
-            gameScene = new Scene(root, MIN_WIDTH_START, MIN_HEIGHT_START);
+            gameScene = new Scene(root);
 //        gameScene = new Scene(FXMLLoader.load(getClass().getResource(MAIN_SCENE_FILE)));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static SceneManager getInstance() {
+    static SceneManager getInstance() {
         return instance;
     }
 

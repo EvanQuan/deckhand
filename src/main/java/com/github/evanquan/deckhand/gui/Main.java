@@ -23,8 +23,6 @@ public class Main extends Application {
     private static final String CSV_PATH = DECK_PATH + "/" + CSV_NAME;
     private static final int MIN_WIDTH = 400;
     private static final int MIN_HEIGHT = 225;
-    private static final int START_WIDTH = MIN_WIDTH + 100;
-    private static final int START_HEIGHT = MIN_HEIGHT;
     /**
      * Title of the window.
      */
