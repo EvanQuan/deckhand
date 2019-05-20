@@ -50,7 +50,6 @@ public class Controller {
     public Controller() {
         csvChooser = new FileChooser();
         csvChooser.getExtensionFilters().add(CSV_FILTER);
-
         imageChooser = new DirectoryChooser();
     }
 
@@ -152,6 +151,8 @@ public class Controller {
      * @param warningMessage to set when the warning window opens
      */
     public void openWarningWindow(String warningMessage) {
+        Stage warningWindow = new Stage();
+        warningWindow.show();
 
     }
 
