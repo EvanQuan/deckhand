@@ -130,8 +130,21 @@ public class Controller {
         return s.replaceAll(NON_DIGIT_PATTERN, "");
     }
 
+    /**
+     * Open a warning dialog box with a specified warning message. The user
+     * cannot continue until they close the dialog box.
+     *
+     * @param warningMessage of the dialog box
+     */
     private void warn(String warningMessage) {
         System.out.println(warningMessage);
+        Alert alert = new Alert(Alert.AlertType.ERROR, warningMessage,
+                ButtonType.OK);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
     }
 
 
