@@ -33,6 +33,10 @@ public class DeckReader {
     private static final String ZERO_WIDTH_NO_BREAK_SPACE =
             Character.toString((char) 65279);
 
+    private HashMap<String, File> getImages(File directoryToSearch) {
+        // Temporary
+        return getImages(directoryToSearch.getPath());
+    }
     /**
      * Get images from image files
      *
@@ -106,6 +110,29 @@ public class DeckReader {
         return buildDeck(images, cardInfo);
     }
 
+    /**
+     * @param imageDirectory for images
+     * @param csvPath        containing card info
+     * @return a {@link Deck} of {@link Card}s gathered from the image files and
+     * CSV values.
+     * @throws Exception if the information from the files is not configured
+     *                   correctly.
+     */
+    public Deck getDeck(File imageDirectory,
+                        File csvPath) throws Exception {
+        HashMap<String, File> images = getImages(imageDirectory);
+        ArrayList<CardInfo> cardInfo =
+                getCardInfo(csvPath);
+
+        checkAllCardsHaveExistingImage(images, cardInfo);
+
+        return buildDeck(images, cardInfo);
+    }
+
+    private ArrayList<CardInfo> getCardInfo(File csv) throws IOException {
+        // Temporary solution?
+        return getCardInfo(csv.getPath());
+    }
     /**
      * Get card info from CSV.
      *

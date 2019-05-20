@@ -1,11 +1,11 @@
 package com.github.evanquan.deckhand.gui;
 
 import com.github.evanquan.deckhand.game.Game;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 public class Controller {
 
@@ -27,10 +27,14 @@ public class Controller {
     public ProgressBar discardsProgressBar;
     public Button warningConfirmationButton;
     public Label warningLabel;
+    public MenuBar menuBar;
 
     private Game game;
-    private String imageDirectory = null;
-    private String csvPath = null;
+    private File imageDirectory = null;
+    /**
+     * .csv file containing card information.
+     */
+    private File cardInfo = null;
 
     public Controller() {
     }
@@ -66,12 +70,12 @@ public class Controller {
             warn(IMAGE_DIRECTORY_NOT_SET_MESSAGE);
             return;
         }
-        if (csvPath == null) {
+        if (cardInfo == null) {
             warn(CSV_NOT_SET_MESSAGE);
             return;
         }
         try {
-            game = new Game(imageDirectory, csvPath);
+            game = new Game(imageDirectory, cardInfo);
         } catch (Exception e) {
             warn(e.getMessage());
             e.printStackTrace();
@@ -90,7 +94,8 @@ public class Controller {
     }
 
     private int parseIntWithDefault(String s) {
-        return s.matches(POSITIVE_INT_PATTERN) ? Integer.parseInt(s) : Controller.DEFAULT_CARD_DRAW;
+        return s.matches(POSITIVE_INT_PATTERN) ?
+                Integer.parseInt(s) : Controller.DEFAULT_CARD_DRAW;
     }
 
     private void validateTextField(TextField field) {
@@ -140,14 +145,17 @@ public class Controller {
     }
 
     /**
-     * Choose a csv file for card infomation.
+     * Choose a csv file for card information.
      */
     public void chooseCSVFile() {
         System.out.println("Choose CSV file");
-//        FileChooser fileChooser = new FileChooser();
+        FileChooser fileChooser = new FileChooser();
+        cardInfo = fileChooser.showOpenDialog(new Stage());
     }
 
     public void chooseCardImages() {
-        System.out.println("Chosoe card images");
+        System.out.println("Choose card images");
+        FileChooser fileChooser = new FileChooser();
+        imageDirectory = fileChooser.showOpenDialog(new Stage());
     }
 }

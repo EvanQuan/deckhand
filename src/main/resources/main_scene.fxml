@@ -71,7 +71,8 @@
            GridPane.halignment="CENTER" GridPane.rowIndex="2"/>
     <ScrollBar orientation="VERTICAL" prefWidth="14.0" GridPane.columnIndex="3"
                GridPane.rowIndex="3" GridPane.rowSpan="5"/>
-    <MenuBar GridPane.columnSpan="2147483647" GridPane.rowSpan="2">
+    <MenuBar fx:id="menuBar" GridPane.columnSpan="2147483647"
+             GridPane.rowSpan="2">
         <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#chooseCSVFile"
                       text="Open Deck Info">
