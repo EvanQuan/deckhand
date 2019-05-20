@@ -2,6 +2,7 @@ package com.github.evanquan.deckhand.gui;
 
 import com.github.evanquan.deckhand.game.Game;
 import javafx.scene.control.*;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -16,6 +17,8 @@ public class Controller {
             "directory has not been set.";
     private static final String CSV_NOT_SET_MESSAGE = "Card info CSV has not " +
             "been set.";
+    private static final FileChooser.ExtensionFilter CSV_FILTER =
+            new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
 
     public TextField drawMainDeckField;
     public TextField drawDiscardsField;
@@ -35,8 +38,20 @@ public class Controller {
      * .csv file containing card information.
      */
     private File cardInfo = null;
+    /**
+     * Chooses the cardInfo CSV file
+     */
+    private FileChooser csvChooser;
+    /**
+     * Chooses the image directory
+     */
+    private DirectoryChooser imageChooser;
 
     public Controller() {
+        csvChooser = new FileChooser();
+        csvChooser.getExtensionFilters().add(CSV_FILTER);
+
+        imageChooser = new DirectoryChooser();
     }
 
     public void about() {
@@ -149,13 +164,11 @@ public class Controller {
      */
     public void chooseCSVFile() {
         System.out.println("Choose CSV file");
-        FileChooser fileChooser = new FileChooser();
-        cardInfo = fileChooser.showOpenDialog(new Stage());
+        cardInfo = csvChooser.showOpenDialog(new Stage());
     }
 
     public void chooseCardImages() {
         System.out.println("Choose card images");
-        FileChooser fileChooser = new FileChooser();
-        imageDirectory = fileChooser.showOpenDialog(new Stage());
+        imageDirectory = imageChooser.showDialog(new Stage());
     }
 }
