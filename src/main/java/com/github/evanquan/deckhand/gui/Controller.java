@@ -1,5 +1,6 @@
 package com.github.evanquan.deckhand.gui;
 
+import com.github.evanquan.deckhand.cards.Card;
 import com.github.evanquan.deckhand.game.Game;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
@@ -78,10 +79,6 @@ public class Controller {
         System.out.println("Shuffle discards");
     }
 
-    public void printHi() {
-        System.out.println("Hi");
-    }
-
     public void undoLastAction() {
         System.out.println("Undo last action");
 
@@ -115,6 +112,10 @@ public class Controller {
     public void drawFromDiscards() {
         int count = parseIntWithDefault(drawMainDeckField.getText());
         System.out.println("Draw " + count + " cards from discards");
+    }
+
+    private void drawCard(Card card) {
+
     }
 
     private int parseIntWithDefault(String s) {
@@ -169,35 +170,24 @@ public class Controller {
     }
 
     /**
-     * Open the warning window is a specified message.
-     *
-     * @param warningMessage to set when the warning window opens
-     */
-    public void openWarningWindow(String warningMessage) {
-        Stage warningWindow = new Stage();
-        warningWindow.show();
-
-    }
-
-    private void setWarningLabel(String s) {
-        warningLabel.setText(s);
-    }
-
-    /**
      * Choose a csv file for card information.
      */
     public void chooseCSVFile() {
         System.out.println("Choose CSV file");
         cardInfo = csvChooser.showOpenDialog(new Stage());
 
-        setCurrentDirectory(cardInfo.getParentFile());
+        if (cardInfo != null) {
+            setCurrentDirectory(cardInfo.getParentFile());
+        }
     }
 
     public void chooseCardImages() {
         System.out.println("Choose card images");
         imageDirectory = imageChooser.showDialog(new Stage());
 
-        setCurrentDirectory(imageDirectory.getParentFile());
+        if (imageDirectory != null) {
+            setCurrentDirectory(imageDirectory.getParentFile());
+        }
     }
 
     /**
