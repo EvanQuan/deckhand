@@ -7,7 +7,8 @@ import com.github.evanquan.deckhand.io.DeckReader;
 import java.io.File;
 
 /**
- * Contains all the components and logic for a complete game.
+ * Contains all the components and logic for a complete game. The GUI should
+ * communicate with this class only for makes changes to the game state.
  *
  * @author Evan Quan
  */
