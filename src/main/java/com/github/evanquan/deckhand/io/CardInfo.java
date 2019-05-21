@@ -7,6 +7,10 @@ import java.io.File;
 
 /**
  * Card info gathered from input CSV file.
+ * Each {@link CardInfo} object containing 1 line of info from the CSV
+ * if the CSV is formatted correctly.
+ * By storing the information in these objects, we can collect information
+ * from the CSV as quickly as possible, and do the remaining work afterwards.
  *
  * @author Evan Quan
  */
@@ -28,7 +32,14 @@ class CardInfo {
      * Quantity of {@link Card} to include in the {@link Deck}.
      */
     private int quantity;
-
+    
+    /**
+     * Default constructor
+     *
+     * @param imageName pathless name without extension
+     * @param cardName title of the card
+     * @param cardDescription description text of the card
+     */
     CardInfo(String imageName, String cardName, String cardDescription,
              int quantity) {
         this.imageName = imageName;
