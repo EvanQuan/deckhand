@@ -33,6 +33,15 @@ public class Controller {
      * convenience.
      */
     private static final File CURRENT_WORKING_DIRECTORY = new File(System.getProperty("user.dir"));
+    /**
+     * Message that describes how to use the application.
+     */
+    private static final String HOW_TO_USE_MESSAGE = "TODO: How to Use Message";
+    /**
+     * Message that describes the application.
+     */
+    private static final String ABOUT_MESSAGE = "TODO: About Message";
+    private static final String QUIT_MESSAGE = "Are you sure you want to quit?";
 
     public TextField drawMainDeckField;
     public TextField drawDiscardsField;
@@ -75,23 +84,25 @@ public class Controller {
 
     public void about() {
         System.out.println("About");
+        dialog(ABOUT_MESSAGE);
     }
 
     public void howToUse() {
         System.out.println("How to Use");
+        dialog(HOW_TO_USE_MESSAGE);
     }
 
     public void shuffleMainDeck() {
-        System.out.println("Shuffle main deck");
+        appendLine("Shuffle main deck");
     }
 
     public void shuffleDiscards() {
-        System.out.println("Shuffle discards");
+        appendLine("Shuffle discards");
     }
 
     public void undoLastAction() {
         System.out.println("Undo last action");
-
+        removeLastLine();
     }
 
     /**
@@ -110,7 +121,7 @@ public class Controller {
             return;
         }
         try {
-            System.out.println("Start new game");
+            appendLine("Start new game");
             game = new Game(imageDirectory, cardInfo);
         } catch (Exception e) {
             error(e.getMessage());
@@ -121,13 +132,14 @@ public class Controller {
 
     public void drawFromMainDeck() {
         int count = parseIntWithDefault(drawMainDeckField.getText());
-        System.out.println("Draw " + count + " cards from main deck");
+        appendLine("Draw " + count + " cards from main deck");
+
 
     }
 
     public void drawFromDiscards() {
         int count = parseIntWithDefault(drawMainDeckField.getText());
-        System.out.println("Draw " + count + " cards from discards");
+        appendLine("Draw " + count + " cards from discards");
     }
 
     private void drawCard(Card card) {
@@ -172,28 +184,56 @@ public class Controller {
      * @param errorMessage of the dialog box
      */
     private void error(String errorMessage) {
-        System.out.println(errorMessage);
-        Alert alert = new Alert(Alert.AlertType.ERROR, errorMessage,
-                ButtonType.OK);
+        alert(errorMessage, Alert.AlertType.ERROR);
+    }
+
+    /**
+     * Open a dialog box with a specified message message. The user
+     * cannot continue until they close the dialog box.
+     *
+     * @param alertMessage of the dialog box
+     */
+    private void alert(String alertMessage, Alert.AlertType type) {
+        System.out.println(alertMessage);
+        Alert alert = new Alert(type, alertMessage, ButtonType.OK);
         alert.showAndWait();
 
-        if (alert.getResult() == ButtonType.OK) {
+        if (alert.getResult().equals(ButtonType.OK)) {
             alert.close();
         }
     }
 
+    public void quit() {
+    }
 
+    private void dialog(String dialogMessage) {
+        alert(dialogMessage, Alert.AlertType.INFORMATION);
+    }
+
+
+    /**
+     * Open a dialog window to confirm if the user wants to quit the
+     * application. The user can confirm the quit or cancel.
+     */
     public void closeWarningWindow() {
-        closeWindow(warningConfirmationButton);
+        Alert quitConfirmationBox = new Alert(Alert.AlertType.CONFIRMATION,
+                QUIT_MESSAGE,
+                ButtonType.YES, ButtonType.NO);
+        quitConfirmationBox.showAndWait();
+
+        ButtonType result = quitConfirmationBox.getResult();
+        if (ButtonType.YES.equals(result)) {
+            quitApplication();
+        } else {
+            quitConfirmationBox.close();
+        }
     }
 
     /**
      * Close the main stage, and end the application.
-     *
-     * @param button to close the window.
      */
-    private void closeWindow(Button button) {
-        Stage stage = (Stage) button.getScene().getWindow();
+    private void quitApplication() {
+        Stage stage = (Stage) menuBar.getScene().getWindow();
 
         stage.close();
     }
