@@ -1,4 +1,4 @@
-package com.github.evanquan.deckhand.game;
+package com.github.evanquan.deckhand.cards;
 
 import com.github.evanquan.deckhand.cards.Board;
 import com.github.evanquan.deckhand.cards.Deck;
@@ -49,9 +49,15 @@ public class Game {
     }
 
     public double getMainDeckPercent() {
-//        return board / totalCardCount;
-        return 0;
+        return getDeckPercent(board.getMainDeck());
     }
 
+    public double getDiscardPilePercent() {
+        return getDeckPercent(board.getDiscardPile());
+    }
+
+    private double getDeckPercent(Deck deck) {
+        return (double) deck.size() / (double) totalCardCount;
+    }
 
 }

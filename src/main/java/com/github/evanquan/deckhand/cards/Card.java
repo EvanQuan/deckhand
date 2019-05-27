@@ -2,6 +2,11 @@ package com.github.evanquan.deckhand.cards;
 
 import java.io.File;
 
+/**
+ * Represents a card.
+ *
+ * @author Evan Quan
+ */
 public class Card {
 
     private String name;

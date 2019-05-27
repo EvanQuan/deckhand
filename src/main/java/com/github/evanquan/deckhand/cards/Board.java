@@ -8,7 +8,7 @@ public class Board {
     /**
      * @param mainDeck to add
      */
-    public Board(Deck mainDeck) {
+    Board(Deck mainDeck) {
         this.mainDeck = mainDeck;
         this.discardPile = new Deck();
         this.cardsInPlay = new Deck();
@@ -28,6 +28,14 @@ public class Board {
 
     public Deck getCardsInPlay() {
         return cardsInPlay;
+    }
+
+    Deck getMainDeck() {
+        return mainDeck;
+    }
+
+    Deck getDiscardPile() {
+        return discardPile;
     }
 
     public void discard(int index) {
@@ -61,7 +69,7 @@ public class Board {
 
     }
 
-    public void reset() {
+    void reset() {
 
     }
 }

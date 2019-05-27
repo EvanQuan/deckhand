@@ -1,7 +1,7 @@
 package com.github.evanquan.deckhand.gui;
 
 import com.github.evanquan.deckhand.cards.Card;
-import com.github.evanquan.deckhand.game.Game;
+import com.github.evanquan.deckhand.cards.Game;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
