@@ -13,6 +13,7 @@ import java.io.File;
  */
 public class Game {
 
+    private int totalCardCount;
     private Board board;
 
     /**
@@ -24,6 +25,7 @@ public class Game {
     public Game(String imageDirectory, String csvPath) throws Exception {
         Deck deck = DeckReader.getInstance().getDeck(imageDirectory, csvPath);
         board = new Board(deck);
+        totalCardCount = deck.size();
     }
 
     /**
@@ -43,6 +45,11 @@ public class Game {
      */
     public void reset() {
         board.reset();
+    }
+
+    public double getMainDeckPercent() {
+//        return board / totalCardCount;
+        return 0;
     }
 
 

@@ -9,6 +9,11 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
+/**
+ * Contains all GUI logic for handling user input.
+ *
+ * @author Evan Quan
+ */
 public class Controller {
 
     private static final String POSITIVE_INT_PATTERN = "\\d+";
@@ -84,6 +89,11 @@ public class Controller {
 
     }
 
+    /**
+     * Reset the game state of the given card info and images. If the card info
+     * and images are not set, then the game will not start and will prompt the
+     * user with an error message.
+     */
     public void startNewGame() {
 
         if (imageDirectory == null) {
@@ -107,6 +117,7 @@ public class Controller {
     public void drawFromMainDeck() {
         int count = parseIntWithDefault(drawMainDeckField.getText());
         System.out.println("Draw " + count + " cards from main deck");
+
     }
 
     public void drawFromDiscards() {
@@ -129,10 +140,18 @@ public class Controller {
         }
     }
 
+    /**
+     * Check the contents of the main deck draw text field to make sure that
+     * only valid characters are contained inside.
+     */
     public void validateMainDeckDrawField() {
         validateTextField(drawMainDeckField);
     }
 
+    /**
+     * Check the contents of the discards draw text field to make sure that only
+     * valid characters are contained inside.
+     */
     public void validateDiscardsDrawField() {
         validateTextField(drawDiscardsField);
     }
@@ -163,6 +182,11 @@ public class Controller {
         closeWindow(warningConfirmationButton);
     }
 
+    /**
+     * Close the main stage, and end the application.
+     *
+     * @param button to close the window.
+     */
     private void closeWindow(Button button) {
         Stage stage = (Stage) button.getScene().getWindow();
 
@@ -181,6 +205,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Prompt the user to choose the card images directory with a directory
+     * chooser interface.
+     */
     public void chooseCardImages() {
         System.out.println("Choose card images");
         imageDirectory = imageChooser.showDialog(new Stage());
@@ -200,5 +228,13 @@ public class Controller {
             csvChooser.setInitialDirectory(directory);
             imageChooser.setInitialDirectory(directory);
         }
+    }
+
+    private void setMainDeckProgressBar(double percent) {
+        mainDeckProgressBar.setProgress(percent);
+    }
+
+    private void setDiscardsProgressBar(double percent) {
+        discardsProgressBar.setProgress(percent);
     }
 }

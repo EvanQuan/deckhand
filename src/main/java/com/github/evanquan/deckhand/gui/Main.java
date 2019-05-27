@@ -5,6 +5,11 @@ import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * Program entry point. Starts up the application GUI.
+ *
+ * @author Evan Quan
+ */
 public class Main extends Application {
 
     /**
@@ -26,7 +31,7 @@ public class Main extends Application {
     /**
      * Title of the window.
      */
-    private static final String TITLE = "Deckhand";
+    private static final String TITLE = "Deckhand: Virtual Deck Manager";
     /**
      * Application icon of the window. Javafx does not accept .ico files.
      */
@@ -36,14 +41,6 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-//        Scanner in = new Scanner(System.in);
-//        String message;
-
-//        do {
-//            System.out.print("Enter message: ");
-//            message = in.nextLine();
-//            System.out.println("\"" + message + "\"");
-//        } while (!message.isEmpty());
         launch(args);
     }
 
