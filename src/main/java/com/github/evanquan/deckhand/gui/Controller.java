@@ -58,6 +58,7 @@ public class Controller {
      * Displays turn history.
      */
     public TextArea historyTextArea;
+    public Button warningConfirmationButton1;
 
     private Game game;
     private File imageDirectory = null;
@@ -74,12 +75,17 @@ public class Controller {
      */
     private DirectoryChooser imageChooser;
 
+    private Stage mainStage;
+    private boolean quitWarningsEnabled;
+
     public Controller() {
         csvChooser = new FileChooser();
         csvChooser.getExtensionFilters().add(CSV_FILTER);
         csvChooser.setInitialDirectory(CURRENT_WORKING_DIRECTORY);
         imageChooser = new DirectoryChooser();
         imageChooser.setInitialDirectory(CURRENT_WORKING_DIRECTORY);
+
+        quitWarningsEnabled = false;
     }
 
     public void about() {
@@ -123,6 +129,21 @@ public class Controller {
         try {
             appendLine("Start new game");
             game = new Game(imageDirectory, cardInfo);
+
+            // If we have successfully started a new game, then add warnings
+            // for quitting.
+            if (!quitWarningsEnabled) {
+                mainStage = (Stage) menuBar.getScene().getWindow();
+                mainStage.setOnCloseRequest(evt -> {
+                    // Prevent the window from closing
+                    evt.consume();
+
+                    // Execute own shutdown procedure
+                    confirmQuit();
+                });
+                quitWarningsEnabled = true;
+            }
+
         } catch (Exception e) {
             error(e.getMessage());
             e.printStackTrace();
@@ -203,9 +224,6 @@ public class Controller {
         }
     }
 
-    public void quit() {
-    }
-
     private void dialog(String dialogMessage) {
         alert(dialogMessage, Alert.AlertType.INFORMATION);
     }
@@ -215,7 +233,10 @@ public class Controller {
      * Open a dialog window to confirm if the user wants to quit the
      * application. The user can confirm the quit or cancel.
      */
-    public void closeWarningWindow() {
+    public void confirmQuit() {
+        if (!quitWarningsEnabled) {
+            quitApplication();
+        }
         Alert quitConfirmationBox = new Alert(Alert.AlertType.CONFIRMATION,
                 QUIT_MESSAGE,
                 ButtonType.YES, ButtonType.NO);
@@ -233,9 +254,7 @@ public class Controller {
      * Close the main stage, and end the application.
      */
     private void quitApplication() {
-        Stage stage = (Stage) menuBar.getScene().getWindow();
-
-        stage.close();
+        mainStage.close();
     }
 
     /**

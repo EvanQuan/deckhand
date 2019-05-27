@@ -21,13 +21,13 @@
            GridPane.halignment="CENTER" GridPane.valignment="BOTTOM"/>
     <Button fx:id="warningConfirmationButton" alignment="CENTER"
             contentDisplay="CENTER" minWidth="44.0" mnemonicParsing="false"
-            onAction="#closeWarningWindow" prefHeight="25.0" prefWidth="44.0"
+            onAction="#confirmQuit" prefHeight="25.0" prefWidth="44.0"
             text="Discard" textAlignment="CENTER" GridPane.rowIndex="1"
             GridPane.valignment="TOP"/>
     <Button fx:id="warningConfirmationButton1" alignment="CENTER"
             contentDisplay="CENTER" layoutX="137.0" layoutY="170.0"
             minWidth="44.0" mnemonicParsing="false"
-            onAction="#closeWarningWindow" prefHeight="25.0" prefWidth="44.0"
+            onAction="#confirmQuit" prefHeight="25.0" prefWidth="44.0"
             text="Place " textAlignment="CENTER" GridPane.columnIndex="1"
             GridPane.rowIndex="1" GridPane.valignment="TOP"/>
 </GridPane>
