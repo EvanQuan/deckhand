@@ -2,6 +2,7 @@ package com.github.evanquan.deckhand.gui;
 
 import com.github.evanquan.deckhand.cards.Card;
 import com.github.evanquan.deckhand.cards.Game;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -44,6 +45,10 @@ public class Controller {
     public Button warningConfirmationButton;
     public Label warningLabel;
     public MenuBar menuBar;
+    /**
+     * Displays turn history.
+     */
+    public TextArea historyTextArea;
 
     private Game game;
     private File imageDirectory = null;
@@ -236,5 +241,23 @@ public class Controller {
 
     private void setDiscardsProgressBar(double percent) {
         discardsProgressBar.setProgress(percent);
+    }
+
+    /**
+     *
+     * @param line to append to turn history
+     */
+    private void appendLine(String line) {
+        historyTextArea.getParagraphs().add(line);
+    }
+
+    /**
+     * Remove the last line from the turn history if it exists.
+     */
+    private void removeLastLine() {
+        ObservableList<CharSequence> paragraphs = historyTextArea.getParagraphs();
+        if (!paragraphs.isEmpty()) {
+            paragraphs.remove(paragraphs.size() - 1);
+        }
     }
 }
