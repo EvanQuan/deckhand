@@ -120,13 +120,7 @@ public class DeckReader {
      */
     public Deck getDeck(File imageDirectory,
                         File csvPath) throws Exception {
-        HashMap<String, File> images = getImages(imageDirectory);
-        ArrayList<CardInfo> cardInfo =
-                getCardInfo(csvPath);
-
-        checkAllCardsHaveExistingImage(images, cardInfo);
-
-        return buildDeck(images, cardInfo);
+        return getDeck(imageDirectory.getPath(), csvPath.getPath());
     }
 
     private ArrayList<CardInfo> getCardInfo(File csv) throws IOException {
