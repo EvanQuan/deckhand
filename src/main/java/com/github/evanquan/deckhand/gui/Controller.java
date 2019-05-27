@@ -174,7 +174,10 @@ public class Controller {
 
     private void validateTextField(TextField field) {
         if (!field.getText().matches(POSITIVE_INT_PATTERN)) {
+            int caretPosition = field.getCaretPosition();
             field.setText(stripNonDigits(field.getText()));
+            field.positionCaret(caretPosition);
+
         }
     }
 
